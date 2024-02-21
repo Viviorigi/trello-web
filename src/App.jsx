@@ -3,11 +3,12 @@ import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 import ThreeDRotation from '@mui/icons-material/ThreeDRotation'
 import HomeIcon from '@mui/icons-material/Home'
 import { pink } from '@mui/material/colors'
-
+import Typogragphy from '@mui/material/Typography'
 function App() {
   return (
     <>
-    <div>Duong</div>
+      <div>Duong</div>
+      <Typogragphy variant='body2' color="text.secondary">Test typography </Typogragphy>
       <Button variant="contained">Hello world</Button>
       <Button variant="contained">Contained</Button>
       <Button variant="outlined">Outlined</Button>
