@@ -28,7 +28,7 @@ function Template() {
         onClick={handleClick}
         endIcon={<ExpandMoreIcon/>}
       >
-        template
+        Template
       </Button>
       <Menu
         id="basic-menu-template"
