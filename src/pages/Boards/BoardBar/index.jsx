@@ -37,7 +37,8 @@ function BoardBar() {
       paddingX:2,
       overflowX:'auto',
       borderBottom:'1px solid white',
-      bgcolor:(theme) => (theme.palette.mode==='dark'?'#34495e':'#1976d2')
+      bgcolor:(theme) => (theme.palette.mode==='dark'?'#34495e':'#1976d2'),
+      '&::-webkit-scrollbar-track':{ m : 2 }
     }}>
       <Box sx={{ display:'flex', alignItems:'center', gap:2 }}>
         <Chip
@@ -75,7 +76,7 @@ function BoardBar() {
         <Button
           variant="outlined"
           startIcon={<PersonAddIcon/>}
-          sx={{ 
+          sx={{
             color: 'white',
             borderColor:'white',
             '&:hover': { borderColor:'white' }
@@ -91,7 +92,10 @@ function BoardBar() {
               width:'34px',
               height:'34px',
               fontSize:'16px',
-              border:'none'
+              border:'none',
+              color:'white',
+              cursor:'pointer',
+              '&:first-of-type':{ bgcolor: '#a4b0be' }
             }
           }}
         >
