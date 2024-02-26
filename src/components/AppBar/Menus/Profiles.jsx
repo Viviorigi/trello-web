@@ -31,7 +31,7 @@ function Profiles() {
           aria-expanded={open ? 'true' : undefined}
         >
           <Avatar
-            sx={{ width: 34, height: 34 }}
+            sx={{ width: 36, height: 36 }}
             alt='Duongdev'
             src='https://cdn.discordapp.com/attachments/1062032706977931387/1062042979331752006/cropped-1920-1080-1109284.png?ex=65e5f49a&is=65d37f9a&hm=a6091d5356acf0941ccb9d6e1a9c5ecf3a731d9edf2b9c5b571f7b610bf981a4&'
           />
