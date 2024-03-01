@@ -10,9 +10,13 @@ import {
   useSensors,
   DragOverlay,
   defaultDropAnimationSideEffects,
-  closestCorners
+  closestCorners,
+  pointerWithin,
+  rectIntersection,
+  getFirstCollision,
+  closestCenter
 } from '@dnd-kit/core'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { arrayMove } from '@dnd-kit/sortable'
 
 import { cloneDeep } from 'lodash'
@@ -42,6 +46,8 @@ function BoardContent({ board }) {
   const [activeDragItemType, setActiveDragItemType] = useState(null)
   const [activeDragItemData, setActiveDragItemData] = useState(null)
   const [oldColumnWhenDraggingCard, setOldColumnWhenDraggingCard] = useState(null)
+  // diem va cham cuoi cung xu ly thuat toan phat hien va cham
+  const lastOverId= useRef(null)
 
   useEffect(() => {
     setOrderedColumn(mapOrder(board?.columns, board?.columnOrderIds, '_id'))
@@ -259,12 +265,44 @@ function BoardContent({ board }) {
       styles:{ active:{ opacity:0.5 } } })
   }
 
+  const collisionDetectionStraegy = useCallback((args ) => {
+    // custom lai thuat toan va cham
+    // truong hop keo column dung closestCorners
+    if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) {
+      return closestCorners({ ...args })
+    }
+    //tim cac diem va cham
+    const pointerIntersections = pointerWithin(args)
+    // thuat toan phat hien va cham tra ve mang cac va cham o day
+    const intersections = !! pointerIntersections?.length
+      ? pointerIntersections
+      : rectIntersection(args)
+    // tim over id dau tien trong dam intersections o tren
+    let overId = getFirstCollision(intersections, 'id')
+    if (overId) {
+      const checkColumn = orderedColumn.find(column => column._id ===overId)
+      if (checkColumn) {
+        overId= closestCenter({
+          ...args,
+          droppableContainers: args.droppableContainers.filter(container => {
+            return (container.id !== overId) && (checkColumn?.cardOrderIds?.includes(container.id))
+          })
+        })[0]?.id
+      }
+      lastOverId.current = overId
+      return [{ id: overId }]
+    }
+    // neu overId la null thi tra ve mang rong tranh crash trang
+    return lastOverId.current ? [{ id: lastOverId.current }] : []
+  }, [activeDragItemType, orderedColumn])
+
   return (
     <DndContext
       //cam bien
       sensors={sensors}
       // thuat toan phat hien va cham
-      collisionDetection={closestCorners}
+      // collisionDetection={closestCorners}
+      collisionDetection={collisionDetectionStraegy}
 
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
