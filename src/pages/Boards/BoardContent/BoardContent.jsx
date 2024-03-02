@@ -12,9 +12,9 @@ import {
   defaultDropAnimationSideEffects,
   closestCorners,
   pointerWithin,
-  rectIntersection,
-  getFirstCollision,
-  closestCenter
+  // rectIntersection,
+  getFirstCollision
+  // closestCenter
 } from '@dnd-kit/core'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { arrayMove } from '@dnd-kit/sortable'
@@ -273,16 +273,19 @@ function BoardContent({ board }) {
     }
     //tim cac diem va cham
     const pointerIntersections = pointerWithin(args)
+
+    // fix triet de flickering
+    if (!pointerIntersections?.length) return
     // thuat toan phat hien va cham tra ve mang cac va cham o day
-    const intersections = !! pointerIntersections?.length
-      ? pointerIntersections
-      : rectIntersection(args)
-    // tim over id dau tien trong dam intersections o tren
-    let overId = getFirstCollision(intersections, 'id')
+    // const intersections = !! pointerIntersections?.length
+    //   ? pointerIntersections
+    //   : rectIntersection(args)
+    // tim over id dau tien trong dam pointerIntersections o tren
+    let overId = getFirstCollision(pointerIntersections, 'id')
     if (overId) {
       const checkColumn = orderedColumn.find(column => column._id ===overId)
       if (checkColumn) {
-        overId= closestCenter({
+        overId= closestCorners({
           ...args,
           droppableContainers: args.droppableContainers.filter(container => {
             return (container.id !== overId) && (checkColumn?.cardOrderIds?.includes(container.id))
