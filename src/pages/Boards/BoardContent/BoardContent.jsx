@@ -19,7 +19,8 @@ import {
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { arrayMove } from '@dnd-kit/sortable'
 
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
+import { generatePlaceholderCard } from '~/utils/formatter'
 
 import Column from './ListColumns/Column/Column'
 import Card from './ListColumns/Column/ListCards/Card/Card'
@@ -91,6 +92,10 @@ function BoardContent({ board }) {
         // xoa card o cai column active
         nextActiveColumn.cards = nextActiveColumn.cards.filter(card => card._id !== activeDraggingCardId)
 
+        //them placeholdecard neu column rong bi keo het card di khong con cai nao nua
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards =[generatePlaceholderCard(nextActiveColumn)]
+        }
         //cap nhat lai mang cardorderid cho du lieu
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(card => card._id)
       }
@@ -106,10 +111,15 @@ function BoardContent({ board }) {
         }
         //tiep theo them cai card dang keo vao overcolumn theo vi tri index moi
         nextOverColumn.cards = nextOverColumn.cards.toSpliced(newCardIndex, 0, rebuild_activeDraggingCardData)
+
+        //xoa placeholder card di neu no dang ton tai
+        nextOverColumn.cards = nextOverColumn.cards.filter(card => !card.FE_PlaceholderCard)
+
         //cap nhat lai mang cardorderid cho du lieu
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map(card => card._id)
       }
 
+      console.log('nextColumns', nextColumns)
       return nextColumns
     })
   }
