@@ -2,7 +2,7 @@ import Container from '@mui/material/Container'
 import AppBar from '~/components/AppBar/AppBar'
 import BoardBar from './BoardBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
-import { mockData } from '~/apis/mock-data'
+// import { mockData } from '~/apis/mock-data'
 import { useEffect, useState } from 'react'
 import { fetchBoardDetailsAPI } from '~/apis'
 function Board() {
@@ -10,7 +10,7 @@ function Board() {
 
   useEffect(() => {
     // tam thoi fix cung boardId
-    const boardId = '65e971b12984b8bb62e039d5'
+    const boardId = '65ea8052593c3da2488e290b'
     //CallAPI
     fetchBoardDetailsAPI(boardId).then((board) => {
       setBoard(board)
