@@ -48,7 +48,7 @@ function BoardBar({ board }) {
             label={board?.title}
             clickable
           />
-        </Tooltip> 
+        </Tooltip>
         <Chip
           sx={MENU_STYLES}
           icon={<VpnLockIcon />}
@@ -104,37 +104,37 @@ function BoardBar({ board }) {
           <Tooltip title="Duongdev">
             <Avatar
               alt="Duongdev"
-              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062042979331752006/cropped-1920-1080-1109284.png?ex=65e5f49a&is=65d37f9a&hm=a6091d5356acf0941ccb9d6e1a9c5ecf3a731d9edf2b9c5b571f7b610bf981a4&" />
+              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062036283419021412/xinh.png?ex=65f8635d&is=65e5ee5d&hm=5cff3b3c4fce6de1c05db62aa9be00adc02e94aa6946fb7c0fad45a61546af11&" />
           </Tooltip>
           <Tooltip title="Duongdev">
             <Avatar
               alt="Duongdev"
-              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062039388378378318/stretched-1920-1080-1129512.jpg?ex=65e5f141&is=65d37c41&hm=521eb6c153a40bf9be696fc93750e060f36f62df06cfe54ba0064b8bf7ffa8bd&" />
+              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062039388378378318/stretched-1920-1080-1129512.jpg?ex=65f86641&is=65e5f141&hm=37f6b120a14bb69563e7472a6815c22dcb93fb0d64ea4318117a93af4bddd4f5&" />
           </Tooltip>
           <Tooltip title="Duongdev">
             <Avatar
               alt="Duongdev"
-              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062039388378378318/stretched-1920-1080-1129512.jpg?ex=65e5f141&is=65d37c41&hm=521eb6c153a40bf9be696fc93750e060f36f62df06cfe54ba0064b8bf7ffa8bd&" />
+              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062036283419021412/xinh.png?ex=65f8635d&is=65e5ee5d&hm=5cff3b3c4fce6de1c05db62aa9be00adc02e94aa6946fb7c0fad45a61546af11&" />
           </Tooltip>
           <Tooltip title="Duongdev">
             <Avatar
               alt="Duongdev"
-              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062042979331752006/cropped-1920-1080-1109284.png?ex=65e5f49a&is=65d37f9a&hm=a6091d5356acf0941ccb9d6e1a9c5ecf3a731d9edf2b9c5b571f7b610bf981a4&" />
+              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062039388378378318/stretched-1920-1080-1129512.jpg?ex=65f86641&is=65e5f141&hm=37f6b120a14bb69563e7472a6815c22dcb93fb0d64ea4318117a93af4bddd4f5&" />
           </Tooltip>
           <Tooltip title="Duongdev">
             <Avatar
               alt="Duongdev"
-              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062036283419021412/xinh.png?ex=65e5ee5d&is=65d3795d&hm=6014f1cd4c77651604d7c822fc0d0b981e7bf09840cef4649ec925c34d2004b2&" />
+              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062039388378378318/stretched-1920-1080-1129512.jpg?ex=65f86641&is=65e5f141&hm=37f6b120a14bb69563e7472a6815c22dcb93fb0d64ea4318117a93af4bddd4f5&" />
           </Tooltip>
           <Tooltip title="Duongdev">
             <Avatar
               alt="Duongdev"
-              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062036283419021412/xinh.png?ex=65e5ee5d&is=65d3795d&hm=6014f1cd4c77651604d7c822fc0d0b981e7bf09840cef4649ec925c34d2004b2&" />
+              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062039388378378318/stretched-1920-1080-1129512.jpg?ex=65f86641&is=65e5f141&hm=37f6b120a14bb69563e7472a6815c22dcb93fb0d64ea4318117a93af4bddd4f5&" />
           </Tooltip>
           <Tooltip title="Duongdev">
             <Avatar
               alt="Duongdev"
-              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062036283419021412/xinh.png?ex=65e5ee5d&is=65d3795d&hm=6014f1cd4c77651604d7c822fc0d0b981e7bf09840cef4649ec925c34d2004b2&" />
+              src="https://cdn.discordapp.com/attachments/1062032706977931387/1062039388378378318/stretched-1920-1080-1129512.jpg?ex=65f86641&is=65e5f141&hm=37f6b120a14bb69563e7472a6815c22dcb93fb0d64ea4318117a93af4bddd4f5&" />
           </Tooltip>
           <Tooltip title="Duongdev">
             <Avatar

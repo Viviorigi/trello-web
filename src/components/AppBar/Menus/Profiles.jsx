@@ -33,7 +33,7 @@ function Profiles() {
           <Avatar
             sx={{ width: 36, height: 36 }}
             alt='Duongdev'
-            src='https://cdn.discordapp.com/attachments/1062032706977931387/1062042979331752006/cropped-1920-1080-1109284.png?ex=65e5f49a&is=65d37f9a&hm=a6091d5356acf0941ccb9d6e1a9c5ecf3a731d9edf2b9c5b571f7b610bf981a4&'
+            src='https://cdn.discordapp.com/attachments/1062032706977931387/1062039388378378318/stretched-1920-1080-1129512.jpg?ex=65f86641&is=65e5f141&hm=37f6b120a14bb69563e7472a6815c22dcb93fb0d64ea4318117a93af4bddd4f5&'
           />
         </IconButton>
       </Tooltip>
