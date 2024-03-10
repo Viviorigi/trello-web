@@ -9,13 +9,13 @@ import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 
 
-function ListColumns( { columns } ) {
+function ListColumns( { columns, createNewColumn, createNewCard } ) {
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
   const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
 
   const [newColumnTitle, setNewColumnTitle] = useState('')
 
-  const addNewColumn = () => {
+  const addNewColumn = async () => {
 
     if (!newColumnTitle) {
       toast.error('Please enter Column title!')
@@ -23,7 +23,13 @@ function ListColumns( { columns } ) {
       return
     }
     // console.log( newColumnTitle )
-    // goi API o day ...
+    // Tao du lieu
+    const newColumnData= {
+      title: newColumnTitle
+
+    }
+
+    await createNewColumn(newColumnData)
 
     // Dong trang thai them column moi va clear input
 
@@ -43,7 +49,7 @@ function ListColumns( { columns } ) {
           '&::-webkit-scrollbar-track':{ m : 2 }
         }}>
 
-        {columns?.map(column => <Column key={column._id} column={column} /> )}
+        {columns?.map(column => <Column key={column._id} column={column} createNewCard={createNewCard} /> )}
 
         {!openNewColumnForm
           ? <Box
