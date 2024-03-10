@@ -32,7 +32,7 @@ const ACTIVE_DRAG_ITEM_TYPE= {
   CARD:'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board, createNewColumn, createNewCard }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
   //neu dung poiter sensor thi phai ket hop vs css touch-action nhung van bug
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
   //yeu cau chuot di chuyen 10px thi moi kich hoat event
@@ -254,10 +254,8 @@ function BoardContent({ board, createNewColumn, createNewCard }) {
 
         //dung arraymove san de sap xep lai mang
         const dndorderedColumns = arrayMove(orderedColumn, oldColumnIndex, newColumnIndex)
-        // 2 cai nay goi api de xu ly
-        // const dndorderedColumnsIds = dndorderedColumns.map(c => c._id )
-        // console.log(dndorderedColumns)
-        // console.log(dndorderedColumnsIds)
+
+        moveColumns (dndorderedColumns)
 
         //cap nhat lai state sau khi da keo tha
         setOrderedColumn(dndorderedColumns)
