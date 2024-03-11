@@ -47,7 +47,7 @@ function Column({ column, createNewCard }) {
   const handleClose = () => {
     setAnchorEl(null)
   }
-  const orderedCards =mapOrder(column?.cards, column?.cardOrderIds, '_id')
+  const orderedCards = column?.cards
 
   const [openNewCardForm, setOpenNewCardForm] = useState(false)
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
@@ -67,7 +67,7 @@ function Column({ column, createNewCard }) {
       columnId: column._id
     }
 
-    await createNewCard(newCardData)
+    createNewCard(newCardData)
     // Dong trang thai them Card moi va clear input
 
     toggleOpenNewCardForm()
