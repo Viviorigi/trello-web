@@ -32,7 +32,7 @@ const ACTIVE_DRAG_ITEM_TYPE= {
   CARD:'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns, moveCardInTheSameColumn }) {
   //neu dung poiter sensor thi phai ket hop vs css touch-action nhung van bug
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
   //yeu cau chuot di chuyen 10px thi moi kich hoat event
@@ -53,7 +53,7 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
   const lastOverId= useRef(null)
 
   useEffect(() => {
-    setOrderedColumn(mapOrder(board?.columns, board?.columnOrderIds, '_id'))
+    setOrderedColumn(board?.columns)
   }, [board] )
 
   //tim 1 column theo cardId
@@ -226,6 +226,7 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
 
         //dung arrayMove keo card tuong tu logic trong boardcontent
         const dndorderedCards = arrayMove(oldColumnWhenDraggingCard?.cards, oldCardIndex, newCardIndex)
+        const dndOrderedCardIds = dndorderedCards.map(i => i._id)
 
         setOrderedColumn(preveColumns => {
           const nextColumns = cloneDeep(preveColumns)
@@ -240,6 +241,8 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
           //tra ve gia tri state moi chuan vi tri
           return nextColumns
         })
+
+        moveCardInTheSameColumn(dndorderedCards, dndOrderedCardIds, oldColumnWhenDraggingCard._id)
       }
     }
 
@@ -255,10 +258,13 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
         //dung arraymove san de sap xep lai mang
         const dndorderedColumns = arrayMove(orderedColumn, oldColumnIndex, newColumnIndex)
 
-        moveColumns (dndorderedColumns)
 
         //cap nhat lai state sau khi da keo tha
         setOrderedColumn(dndorderedColumns)
+
+
+        moveColumns(dndorderedColumns)
+
       }
     }
 
