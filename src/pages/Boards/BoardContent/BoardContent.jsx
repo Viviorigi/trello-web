@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
-import { mapOrder } from '~/utils/sorts'
+
 
 import {
   DndContext,
@@ -32,7 +32,7 @@ const ACTIVE_DRAG_ITEM_TYPE= {
   CARD:'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board, createNewColumn, createNewCard, moveColumns, moveCardInTheSameColumn }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns, moveCardInTheSameColumn, moveCardToDifferentColumn }) {
   //neu dung poiter sensor thi phai ket hop vs css touch-action nhung van bug
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
   //yeu cau chuot di chuyen 10px thi moi kich hoat event
@@ -62,7 +62,7 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns, move
     return orderedColumn.find(column => column?.cards?.map(card => card._id)?.includes(cardId))
   }
 
-  //cap nhat lai satete trong truong hop di chuyen card giua cac column khac nhau
+  //cap nhat lai state trong truong hop di chuyen card giua cac column khac nhau
   const moveCardBetweenDifferrentColumns = (
     overColumn,
     overCardId,
@@ -70,7 +70,8 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns, move
     over,
     activeColumn,
     activeDraggingCardId,
-    activeDraggingCardData
+    activeDraggingCardData,
+    triggerFrom
   ) => {
     setOrderedColumn(preveColumns => {
 
@@ -121,6 +122,10 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns, move
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map(card => card._id)
       }
 
+      // neu func duoc goi tu handledragendla keo tha goi api xu li o day
+      if (triggerFrom ==='handleDragEnd') {
+        moveCardToDifferentColumn(activeDragItemId, oldColumnWhenDraggingCard._id, nextOverColumn._id, nextColumns )
+      }
       return nextColumns
     })
   }
@@ -171,7 +176,8 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns, move
         over,
         activeColumn,
         activeDraggingCardId,
-        activeDraggingCardData
+        activeDraggingCardData,
+        'handleDragOver'
       )
     }
 
@@ -212,7 +218,8 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns, move
             over,
             activeColumn,
             activeDraggingCardId,
-            activeDraggingCardData
+            activeDraggingCardData,
+            'handleDragEnd'
           )
         }
       } else {
