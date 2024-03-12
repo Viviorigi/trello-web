@@ -12,7 +12,8 @@ import {
   createNewColumnAPI,
   createNewCardAPI,
   updateBoardDetailsAPI,
-  updateColumnDetailsAPI
+  updateColumnDetailsAPI,
+  moveCardToDifferentColumnAPI
 } from '~/apis'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -66,8 +67,13 @@ function Board() {
     const newBoard = { ...board }
     const columnToUpdate = newBoard.columns.find(column => column._id ===createCard.columnId)
     if (columnToUpdate) {
-      columnToUpdate.cards.push(createCard)
-      columnToUpdate.cardOrderIds.push(createCard._id)
+      if (columnToUpdate.cards.some(card => card.FE_PlaceholderCard)) {
+        columnToUpdate.cards = [createCard]
+        columnToUpdate.cardOrderIds= [createCard._id]
+      } else {
+        columnToUpdate.cards.push(createCard)
+        columnToUpdate.cardOrderIds.push(createCard._id)
+      }
     }
     setBoard(newBoard)
   }
@@ -98,6 +104,31 @@ function Board() {
     updateColumnDetailsAPI(columnId, { cardOrderIds: dndOrderedCardIds })
   }
 
+  const moveCardToDifferentColumn= (currentCardId, preColumnId, nextColumnId, dndorderedColumns ) => {
+
+    // update cho chuan du lieu state board
+    const dndorderedColumnsIds = dndorderedColumns.map(c => c._id )
+    const newBoard = { ...board }
+    newBoard.columns = dndorderedColumns
+    newBoard.columnOrderIds = dndorderedColumnsIds
+    setBoard(newBoard)
+
+    //Goi API xu ly phia BE
+    let prevCardOrderIds = dndorderedColumns.find(c => c._id === preColumnId)?.cardOrderIds
+    //Xu ly van de khi keo card cuoi cung khoi column column rong co placeholder card can xoa no truoc khi gui cho be
+    if (prevCardOrderIds[0].includes('placeholder-card')) {
+      prevCardOrderIds=[]
+    }
+
+    moveCardToDifferentColumnAPI({
+      currentCardId,
+      preColumnId,
+      prevCardOrderIds,
+      nextColumnId,
+      nextCardOrderIds: dndorderedColumns.find(c => c._id === nextColumnId)?.cardOrderIds
+    })
+  }
+
   if (!board) {
     return (
       <Box sx={{
@@ -114,6 +145,7 @@ function Board() {
     )
   }
 
+
   return (
     <Container disableGutters maxWidth={ false } sx={{ height: '100vh' }}>
       <AppBar />
@@ -124,6 +156,7 @@ function Board() {
         createNewCard={createNewCard}
         moveColumns={moveColumns}
         moveCardInTheSameColumn={moveCardInTheSameColumn}
+        moveCardToDifferentColumn={moveCardToDifferentColumn}
       />
     </Container>
   )
