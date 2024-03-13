@@ -27,8 +27,8 @@ export const updateColumnDetailsAPI = async (columnId, updateData) => {
   return response.data
 }
 
-export const moveCardToDifferentColumnAPI = async (updateData) => {
-  const response = await axios.put(`${API_ROOT}/v1/boards/supports/moving_cards`, updateData)
+export const DeleteColumnDetailsAPI = async (columnId) => {
+  const response = await axios.delete(`${API_ROOT}/v1/columns/${columnId}`)
   return response.data
 }
 
@@ -36,5 +36,10 @@ export const moveCardToDifferentColumnAPI = async (updateData) => {
 export const createNewCardAPI = async (newCardData) => {
   const response = await axios.post(`${API_ROOT}/v1/cards`, newCardData)
   //luu y axios se tra ket qua property cua no la data
+  return response.data
+}
+
+export const moveCardToDifferentColumnAPI = async (updateData) => {
+  const response = await axios.put(`${API_ROOT}/v1/boards/supports/moving_cards`, updateData)
   return response.data
 }

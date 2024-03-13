@@ -32,7 +32,7 @@ const ACTIVE_DRAG_ITEM_TYPE= {
   CARD:'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board, createNewColumn, createNewCard, moveColumns, moveCardInTheSameColumn, moveCardToDifferentColumn }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns, moveCardInTheSameColumn, moveCardToDifferentColumn, deleteColumnDetails }) {
   //neu dung poiter sensor thi phai ket hop vs css touch-action nhung van bug
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
   //yeu cau chuot di chuyen 10px thi moi kich hoat event
@@ -343,6 +343,7 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns, move
           columns={orderedColumn}
           createNewColumn={createNewColumn}
           createNewCard={createNewCard}
+          deleteColumnDetails={deleteColumnDetails}
         />
         <DragOverlay dropAnimation={customDropAnimation}>
           {( !activeDragItemType && null)}
