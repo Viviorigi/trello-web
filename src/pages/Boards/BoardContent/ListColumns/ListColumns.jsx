@@ -9,13 +9,13 @@ import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 
 
-function ListColumns( { columns, createNewColumn, createNewCard, deleteColumnDetails} ) {
+function ListColumns( { columns, createNewColumn, createNewCard, deleteColumnDetails } ) {
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
   const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
 
   const [newColumnTitle, setNewColumnTitle] = useState('')
 
-  const addNewColumn =  () => {
+  const addNewColumn = () => {
 
     if (!newColumnTitle) {
       toast.error('Please enter Column title!')
