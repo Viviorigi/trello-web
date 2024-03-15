@@ -156,6 +156,7 @@ function Board() {
         height:'100vh'
       }}>
         <CircularProgress />
+        Loading Board...
         <Typography />
       </Box>
     )
